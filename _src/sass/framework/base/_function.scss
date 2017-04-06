@@ -1,9 +1,21 @@
-/*----------------------
-	mixiin
-----------------------*/
-
-// breakpoint
+// ブレークポイント
 $breakpoint : 768px;
+
+// ページ基本幅（PC）
+$contentBaseWidgth_PC : 960px;
+
+// ページ基本幅（SP）
+$contentBaseWidgth_SP : 560;
+$spBaseWidth : percentage($contentBaseWidgth_SP/640);
+
+// 画像パス
+$imgPath : "../images/";
+
+// 文字まわり
+$base-font-size : 12px;
+$base-line-height : 1.8em;
+$linkColor : #00a0e9;
+
 
 // レスポンシブ
 @mixin desktop {
@@ -11,7 +23,6 @@ $breakpoint : 768px;
 		@content;
 	}
 }
-
 @mixin smartphone {
 	@media screen and (max-width: #{$breakpoint}) {
 		@content;
@@ -28,27 +39,34 @@ $breakpoint : 768px;
 	}
 }
 
-// スマホ版背景画像の高さ確保用の計算処理 $wrapWidth: 親要素の横幅（このmixinをかける要素にもし100%をかけた場合に何ピクセルになるか？？で判断）
-@mixin setImgPaddingBtm($w,$h,$wrapWidth:640) {
-	$wRatio : $w/$wrapWidth;
-	margin: 0 percentage((1-$wRatio) / 2);
-	padding-bottom: percentage($h/$wrapWidth);
+// 共通背景画像（PC）
+@mixin backgroundFig($url) {
+	background: url("#{$imgPath}#{$url}") no-repeat 50% 50%;
+	text-indent: -9999px;
+}
+// 共通背景画像（SP）
+@mixin backgroundFigSP($w, $h, $url) {
+	width: $w;
+	height: 0;
+	padding-bottom: $h;
+	background: url("#{$imgPath}#{$url}") no-repeat 50% 50%;
+	background-size: contain;
+	text-indent: -9999px;
 }
 
-
-
-// フォントサイズの調整
-// px → remに変換（rem非対応用にpxも指定）
-// @param $lineSizePx px数指定（Photoshopのテキストボックスで表示される数値）省略可能
-@mixin font-size($size, $lineSizePx : null) {
-	$base : 14; // ベースの文字サイズ
-	font-size: $size + px;
-	@if $lineSizePx != null {
-		line-height : $lineSizePx / $size;
+// ボタンのロールオーバー
+@mixin hoverEffect($alpha:0.4) {
+	&:hover {
+		opacity: $alpha;
+		-ms-filter: "alpha(opacity=#{$alpha*100})";
+	}
+	@include smartphone {
+		&:hover {
+			opacity: inherit;
+			-ms-filter: "alpha(opacity=100)";
+		}
 	}
 }
-
-
 
 // CSSのeasing
 // Default
