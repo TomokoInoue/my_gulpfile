@@ -1,0 +1,33 @@
+/*
+その他基本スタイル
+*/
+html,body {
+	height:100%;
+}
+body {
+	font:13px "Helvetica Neue",Helvetica,Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+	line-height: 1.8em;
+	text-rendering: optimizeLegibility; /* 「読みやすく、より美しく」を気持ち程度に実現・カーニングしてくれる */
+	-webkit-text-size-adjust: 100%; /* iPhoneやAndroidのブラウザで、縦向き (Portrate mode) と横向き (Landscape mode) の文字サイズを自動調整する機能（100%で機能オフ） */
+	line-break: strict; /* 文章の読みやすさや美的な観点から、句読点や括弧等の文字が行頭（または行末）に来ないようにする処理（禁則処理） */
+	-webkit-font-smoothing: antialiased; /*Safariで文字をすっきりみせる*/
+	-webkit-overflow-scrolling: touch; /* スクロールを慣性に */
+}
+img {
+	vertical-align: top;
+}
+
+.clearfix:after{ content : ''; display : block; clear : both; height:0; }
+
+
+
+@include desktop() {
+	.only_sp {
+		display: none;
+	}
+}
+@include smartphone() {
+	.only_pc {
+		display: none;
+	}
+}

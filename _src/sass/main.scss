@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/**
+* 基本設定（不要な設定は必ず削除してください）
+*/
+// ページの基本横幅（ページ幅）
+$pageWidth : 950px;
+
+// スマホのページの基本幅（幅が560px）
+$spContentWidth: 560;
+$spBaseWidth : percentage($spContentWidth/640);
+
+// 画像パス
+$imgPath : '../images';
+
+// リンク文字色
+$linkColor : #00a0e9;
+
+// コンテンツの基本カラー（フッターなどで利用）
+$baseColor : #fff462;
+
+// 強調文字（ハッシュタグなど）のカラー
+$strongColor : red;
+
+
+@import "framework/base/function";
+@import "framework/base/reset";
+@import "framework/base/common";
+@import "framework/base/layout";
