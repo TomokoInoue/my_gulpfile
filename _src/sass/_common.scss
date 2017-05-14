@@ -37,6 +37,10 @@ body {
 	& > img {
 		// 計測タグが生成するimgタグの影響で余白が出てしまうため
 		position: absolute;
+		@include smartphone {
+			max-width: 100%;
+	        height: auto;
+		}
 	}
 	@include desktop {
 		font-size: 16px;
