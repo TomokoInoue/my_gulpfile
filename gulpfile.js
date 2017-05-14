@@ -49,8 +49,8 @@ gulp.task('css', () => {
     gulp.src(config.cssSrc)
         // 各プラグインの処理を施す
         .pipe(plumber()) // 強制終了の防止
-        .pipe(sourcemaps.init()) // どのファイルか分かるようにする
         .pipe(autoprefixer()) // ベンダープレフィックスの付与
+        .pipe(sourcemaps.init()) // どのファイルか分かるようにする
         .pipe(sass({
             outputStyle: 'compressed' // CSSを1行にコンパイル
         }))
