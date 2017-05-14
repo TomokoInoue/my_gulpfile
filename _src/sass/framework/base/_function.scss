@@ -54,20 +54,6 @@ $linkColor : #00a0e9;
 	text-indent: -9999px;
 }
 
-// ボタンのロールオーバー
-@mixin hoverEffect($alpha:0.4) {
-	&:hover {
-		opacity: $alpha;
-		-ms-filter: "alpha(opacity=#{$alpha*100})";
-	}
-	@include smartphone {
-		&:hover {
-			opacity: inherit;
-			-ms-filter: "alpha(opacity=100)";
-		}
-	}
-}
-
 // CSSのeasing
 // Default
 $linear: cubic-bezier(0.250, 0.250, 0.750, 0.750);
