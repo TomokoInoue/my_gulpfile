@@ -1,20 +1,66 @@
 @charset "UTF-8";
-/** ----------------------------------------
- * 共通CSS
- * ---------------------------------------- */
+/*-----------------------------
+* 基本ブロック（継承して利用）
+-----------------------------*/
+// 両方設定
+%ext_base_block {
+	position: relative;
+	@include desktop {
+		width: $contentBaseWidgth_PC;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@include smartphone {
+		width: $spBaseWidth;
+		margin: 0 auto;
+	}
+}
 
+// PCだけ設定
+%ext_base_block_pc {
+	@include desktop {
+		position: relative;
+		width: $contentBaseWidgth_PC;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+// スマホだけ設定
+%ext_base_block_sp {
+	@include smartphone {
+		position: relative;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+
+
+/** ---------------------
+ * 要素ごとのCSS
+ * ------------------- */
 // PCのみ表示
-.pc_only {
+.only_pc {
 	@include smartphone {
 		display: none;
 	}
 }
 
 // SPのみ表示
-.sp_only {
+.only_sp {
 	display: none;
 	@include smartphone {
 		display: inherit;
+	}
+}
+
+// ボタンのロールオーバー
+.btnImg_hover {
+	@include desktop {
+		transition: all 0.3s $ease-in-out;
+		&:hover {
+			opacity: 0.6;
+		}
 	}
 }
 
@@ -30,9 +76,13 @@
 	transform-origin: 25% 70%;
 }
 
+
+/** ---------------------
+ * 全体共通CSS
+ * ------------------- */
 body {
-	background-color: #f5f5f5;
-	color: #333;
+	background-color: $baseBkgColor;
+	color: $base-font-color;
 	font-family: "游ゴシック", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
 	& > img {
 		// 計測タグが生成するimgタグの影響で余白が出てしまうため
@@ -43,120 +93,76 @@ body {
 		}
 	}
 	@include desktop {
-		font-size: 16px;
-		font-weight: 500;
-		line-height: 1.8em;
+		font-size: $base-font-size;
+		line-height: $base-line-height;
 		min-width: $contentBaseWidgth_PC;
 	}
 	@include smartphone {
 		min-width: inherit;
-		background-color: #fff;
 		-webkit-text-size-adjust: 100%;
 	}
 }
 
-// ヘッダー
+// aタグのリンク文字
+a,
+a:link, // 未訪問のリンク
+a:visited,
+a:hover,
+a:active { // クリックしてから離されるまでの状態
+	color: $linkColor;
+}
+
+
+/** ---------------------
+ * ヘッダーCSS
+ * ------------------- */
 header {
 	background-color: #fff;
-	.header_inner {
-		@include clearfix;
+	.header_contentes {
+		@extend %ext_base_block;
 		@include desktop {
-			width: $contentBaseWidgth_PC;
-			height: 60px; // 仮
 			margin: 0 auto;
+			padding: 20px 0;
 		}
 		@include smartphone {
-			width: inherit;
-			height: 50px;
-			padding: 0 percentage(20 / 640);
+			padding: percentage(30 / 640) 0;
 			background-color: #fff;
-			border-bottom: solid 3px #ccc;
-		}
-	}
-	// スマホのメニューボタン
-	.navi_btn {
-		@include desktop {
-			display: none;
-		}
-		@include smartphone {
-			display: block;
-			position: fixed;
-			top: 0;
-			right: 0;
-			z-index: 2;
-			width: 50px;
-			background-color: #3386c5;
-			font-size: 10px;
-			font-weight: bold;
-			text-align: center;
-			a {
-				display: block;
-				position: relative;
-				color: #fff;
-				line-height: 50px;
-				text-decoration: none;
-				&:before,
-				&:after {
-					content: "";
-					display: block;
-					position: absolute;
-					width: 32px;
-					margin: 0 auto;
-					transition: all 300ms;
-				}
-				&:before {
-					top: 14px;
-					left: 0;
-					right: 0;
-					border-top: solid 2px #fff;
-				}
-				&:after {
-					bottom: 14px;
-					left: 0;
-					right: 0;
-					border-top: solid 2px #fff;
-				}
-				&.close {
-					text-indent: -9999px;
-					&:before {
-						-webkit-transform: translateY(11px) rotate(-45deg);
-						transform: translateY(10px) rotate(-45deg);
-					}
-					&:after {
-						-webkit-transform: translateY(-11px) rotate(45deg);
-						transform: translateY(-10px) rotate(45deg);
-					}
-				}
-			}
 		}
 	}
 }
 
-// コンテンツエリア
-.content_area {
-	@include desktop {
-		width: $contentBaseWidgth_PC;
-		height: 1300px; // 仮
-		margin: 0 auto;
-	}
-	@include smartphone {
-		width: inherit;
-		padding-top: 20px;
-	}
-}
 
-// フッター
-footer {
-	background-color: #ccc;
-	.footer_inner {
+/** ---------------------
+ * コンテンツエリアCSS
+ * ------------------- */
+.main_area {
+	.main_contents {
+		@extend %ext_base_block;
 		@include desktop {
-			width: $contentBaseWidgth_PC;
-			height: 40px; // 仮
+			height: 1300px; // 仮
 			margin: 0 auto;
 		}
 		@include smartphone {
-			width: inherit;
+			height: 2000px;
 			padding-top: 20px;
+		}
+	}
+}
+
+
+/** ---------------------
+ * フッターCSS
+ * ------------------- */
+footer {
+	background-color: #fff;
+	.footer_contens {
+		@extend %ext_base_block;
+		@include desktop {
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+		@include smartphone {
+			padding: 20px 0;
 		}
 		.copyright {
 			text-align: center;
@@ -168,7 +174,6 @@ footer {
 			@include smartphone {
 				width: 100%;
 				font-size: 8px;
-				text-align: center;
 			}
 		}
 	}
