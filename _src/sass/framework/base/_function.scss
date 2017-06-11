@@ -44,12 +44,16 @@ $baseBkgColor : #f5f5f5;
 }
 
 // 共通背景画像（PC）
-@mixin backgroundFig($url) {
+@mixin backgroundFig($w, $h, $url) {
+	display: block;
+	width: $w;
+	height: $h;
 	background: url("#{$imgPath}#{$url}") no-repeat 50% 50%;
 	text-indent: -9999px;
 }
 // 共通背景画像（SP）
 @mixin backgroundFigSP($w, $h, $url) {
+	display: block;
 	width: $w;
 	height: 0;
 	padding-bottom: $h;
