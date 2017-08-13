@@ -26,6 +26,21 @@
         /*--------------------------
          スクロール処理
         --------------------------*/
+        $('#back_to_top').hide();
+
+        // スクロールした位置で表示、非表示にする
+        $(window).scroll(function() {
+            console.log($(this).scrollTop());
+
+            // 取得したスクロールの垂直位置が60より大きかった場合
+            if ($(this).scrollTop() > 60) {
+                $('.top_page_btn').fadeIn(); // フェードして表示
+            } else {
+                $('.top_page_btn').fadeOut(); // フェードして非表示
+            }
+        });
+
+        // クリックした時
         $('a[href^="#"]').on('click', function(evt) {
             evt.preventDefault();
 
@@ -33,7 +48,7 @@
             var $target = $($link === "#" || $link === "" ? "html" : $link);
             var $position = $target.offset().top -110; // コンテンツ要素のトップから110px空ける
 
-            // 移動するアニメーション
+            // 指定の場所へ移動する
             $("html, body").animate({
                 scrollTop: $position,
                 easing: 'linear'
