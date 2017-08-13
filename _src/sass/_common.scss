@@ -40,14 +40,14 @@
  * 要素ごとのCSS
  * ------------------- */
 // PCのみ表示
-.only_pc {
+.pc_only {
 	@include smartphone {
 		display: none;
 	}
 }
 
 // SPのみ表示
-.only_sp {
+.sp_only {
 	display: none;
 	@include smartphone {
 		display: inherit;
@@ -62,6 +62,12 @@
 			opacity: 0.6;
 		}
 	}
+}
+
+// ぶら下がりインデント
+.hanging_indent > li {
+	padding-left: 1em;
+	text-indent: -1em;
 }
 
 // 文字を小さくする ※Chromeで10px以下にならないため、transformで制御する
@@ -84,9 +90,8 @@ body {
 	background-color: $baseBkgColor;
 	color: $base-font-color;
 	font-family: "游ゴシック", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
-	& > img {
-		// 計測タグが生成するimgタグの影響で余白が出てしまうため
-		position: absolute;
+	img {
+		vertical-align: bottom;
 		@include smartphone {
 			max-width: 100%;
 	        height: auto;
