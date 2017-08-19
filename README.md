@@ -1,6 +1,6 @@
-# my Sample gulpfile
+# my gulpfile
 
-Generation project of static pages for TOYOTA Template.
+Generation project of static pages for my_gulpfile Template.
 
 ## Getting Started
 ### Environment
